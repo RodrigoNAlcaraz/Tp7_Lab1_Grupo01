@@ -5,7 +5,9 @@
  */
 package vistas;
 
+import java.util.HashSet;
 import javax.swing.JOptionPane;
+import tp7_lab1_grupo01.Alumno;
 
 /**
  *
@@ -13,11 +15,16 @@ import javax.swing.JOptionPane;
  */
 public class ViewFormAlumno extends javax.swing.JInternalFrame {
 
+    private HashSet<Alumno> alum;
+
     /**
      * Creates new form ViewFormAlumno
+     *
+     * @param alum
      */
-    public ViewFormAlumno() {
+    public ViewFormAlumno(HashSet<Alumno> alum) {
         initComponents();
+        this.alum = alum;
     }
 
     /**
@@ -40,7 +47,7 @@ public class ViewFormAlumno extends javax.swing.JInternalFrame {
         btnNuevo = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
 
-        lblFormMaterias.setFont(new java.awt.Font("Sitka Display", 1, 18)); // NOI18N
+        lblFormMaterias.setFont(new java.awt.Font("Sitka Display", 1, 24)); // NOI18N
         lblFormMaterias.setForeground(new java.awt.Color(0, 0, 255));
         lblFormMaterias.setText("Formulario de Alumnos");
 
@@ -101,12 +108,8 @@ public class ViewFormAlumno extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addComponent(lblFormMaterias)
-                .addGap(0, 117, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 391, Short.MAX_VALUE)
                 .addComponent(btnGuardar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnNuevo)
@@ -129,6 +132,10 @@ public class ViewFormAlumno extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtLegajo, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(193, 193, 193)
+                .addComponent(lblFormMaterias)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,7 +154,7 @@ public class ViewFormAlumno extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombre)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNuevo)
                     .addComponent(btnSalir)
@@ -178,9 +185,7 @@ public class ViewFormAlumno extends javax.swing.JInternalFrame {
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         // TODO add your handling code here:
 
-        txtApellido.setText("");
-        txtLegajo.setText("");
-        txtNombre.setText("");
+        limpiar();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
@@ -189,35 +194,36 @@ public class ViewFormAlumno extends javax.swing.JInternalFrame {
             int lp = Integer.parseInt(txtLegajo.getText());
             String apellido = txtApellido.getText();
             String nombre = txtNombre.getText();
+            boolean corroborar = false;
+            Alumno alumno1 = new Alumno(lp, apellido, nombre);
 
-            ViewMenuPpal.alum.setLegajo(lp);
-            ViewMenuPpal.alum.setApellido(apellido);
-            ViewMenuPpal.alum.setNombre(nombre);
+            for (Alumno alumno : alum) {
+                if (alumno.getLegajo() == alumno1.getLegajo()) {
+                    corroborar = true;
+                }
 
-            if (ViewMenuPpal.alum.getNombre() != null) {
+            }
+
+            if (corroborar) {
+                JOptionPane.showMessageDialog(this, "¡UPS!, el alumno ya fue registrado con anterioridad");
+            } else {
+
+                alum.add(alumno1);
                 JOptionPane.showMessageDialog(this, "Alumno agregado exitosamente");
                 limpiar();
 
-            }else {
-            JOptionPane.showMessageDialog(this,"No fue posible guardarlo, verifique");
-        }
-    }
-    catch (Exception ex
-
-    
-        ) {
+            }
+        } catch (Exception ex) {
 
             JOptionPane.showMessageDialog(this, "El DNI es incorrecto.");
-        txtLegajo.requestFocus();
-    }
+            txtLegajo.requestFocus();
+        }
 
     }//GEN-LAST:event_btnGuardarActionPerformed
-public void limpiar() {
-
+    public void limpiar() {
         txtLegajo.setText("");
         txtApellido.setText("");
         txtNombre.setText("");
-
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

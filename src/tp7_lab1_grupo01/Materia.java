@@ -1,16 +1,14 @@
-
 package tp7_lab1_grupo01;
 
-
 public class Materia {
-    
+
     private int idMateria;
     private String nombre;
     private int anio;
 
     public Materia(int idMateria, String nombre, int anio) {
         this.idMateria = idMateria;
-        this.nombre = nombre;
+        this.nombre = nombre.toUpperCase();
         this.anio = anio;
     }
 
@@ -43,10 +41,7 @@ public class Materia {
 
     @Override
     public String toString() {
-        return "Materia{" + "idMateria=" + idMateria + ", nombre=" + nombre + ", anio=" + anio + '}';
+        return "ID: " + idMateria + ", nombre: " + nombre + ", año: " + anio;
     }
-    
-    
-    
-    
+
 }

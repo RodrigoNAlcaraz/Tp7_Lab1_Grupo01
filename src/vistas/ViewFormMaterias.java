@@ -5,17 +5,26 @@
  */
 package vistas;
 
+import java.util.HashSet;
+import javax.swing.JOptionPane;
+import tp7_lab1_grupo01.Materia;
+
 /**
  *
  * @author nico
  */
 public class ViewFormMaterias extends javax.swing.JInternalFrame {
 
+    private HashSet<Materia> mat;
+
     /**
      * Creates new form ViewFormMaterias
+     *
+     * @param mat
      */
-    public ViewFormMaterias() {
+    public ViewFormMaterias(HashSet<Materia> mat) {
         initComponents();
+        this.mat = mat;
     }
 
     /**
@@ -38,7 +47,7 @@ public class ViewFormMaterias extends javax.swing.JInternalFrame {
         btnSalir = new javax.swing.JButton();
         btnGuardar = new javax.swing.JButton();
 
-        lblFormMaterias.setFont(new java.awt.Font("Sitka Display", 1, 18)); // NOI18N
+        lblFormMaterias.setFont(new java.awt.Font("Sitka Display", 1, 24)); // NOI18N
         lblFormMaterias.setForeground(new java.awt.Color(0, 0, 255));
         lblFormMaterias.setText("Formulario de Materias");
 
@@ -99,37 +108,39 @@ public class ViewFormMaterias extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNombreMa)
-                    .addComponent(lblCodMateria))
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtNombreMa)
-                        .addGap(21, 21, 21))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtCodMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addComponent(lblFormMaterias)
-                .addGap(0, 117, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblAnio)
-                .addGap(18, 18, 18)
-                .addComponent(txtAnio)
-                .addGap(21, 21, 21))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnGuardar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnNuevo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSalir)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblFormMaterias)
+                .addGap(176, 176, 176))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNombreMa)
+                            .addComponent(lblCodMateria))
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtNombreMa)
+                                .addGap(21, 21, 21))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtCodMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(372, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnGuardar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnNuevo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnSalir))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblAnio)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtAnio)))
+                        .addGap(21, 21, 21))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,12 +159,12 @@ public class ViewFormMaterias extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAnio)
                     .addComponent(txtAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 69, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNuevo)
                     .addComponent(btnSalir)
                     .addComponent(btnGuardar))
-                .addContainerGap())
+                .addGap(17, 17, 17))
         );
 
         pack();
@@ -183,27 +194,43 @@ public class ViewFormMaterias extends javax.swing.JInternalFrame {
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
         // TODO add your handling code here:
-
-        txtAnio.setText("");
-        txtCodMateria.setText("");
-        txtNombreMa.setText("");
+        limpiar();
     }//GEN-LAST:event_btnNuevoActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         // TODO add your handling code here:
-        int id = Integer.parseInt(txtCodMateria.getText());
-        int anio = Integer.parseInt(txtCodMateria.getText());
-        String nombre = txtNombreMa.getText();
+        try {
+            int id = Integer.parseInt(txtCodMateria.getText());
+            int anio = Integer.parseInt(txtAnio.getText());
+            String nombre = txtNombreMa.getText();
+            boolean corroborar = false;
+            Materia materia1 = new Materia(id, nombre, anio);
 
-        ViewMenuPpal.mat.setNombre(nombre);
-        ViewMenuPpal.mat.setAnio(anio);
-        ViewMenuPpal.mat.setIdMateria(id);
-        
+            for (Materia materia : mat) {
+                if (materia.getIdMateria() == materia1.getIdMateria() && materia.getNombre().equals(materia1.getNombre()) && materia.getAnio() == materia1.getAnio()) {
+                    corroborar = true;
+                }
+            }
+
+            if (corroborar) {
+                JOptionPane.showMessageDialog(this, "Lo siento, la materia ya esta cargada");
+            } else {
+                mat.add(materia1);
+                JOptionPane.showMessageDialog(this, "Materia agregada exitosamente!!");
+                limpiar();
+
+            }
+        } catch (Exception ex) {
+
+            JOptionPane.showMessageDialog(this, "El ID y/o Año es incorrecto.");
+            txtAnio.requestFocus();
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
+    public void limpiar() {
         txtAnio.setText("");
         txtCodMateria.setText("");
         txtNombreMa.setText("");
-    }//GEN-LAST:event_btnGuardarActionPerformed
-
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGuardar;

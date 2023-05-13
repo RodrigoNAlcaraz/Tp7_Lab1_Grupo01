@@ -5,8 +5,9 @@
  */
 package vistas;
 
-import java.util.ArrayList;
-import javax.swing.ComboBoxModel;
+import java.util.HashSet;
+import tp7_lab1_grupo01.Alumno;
+import tp7_lab1_grupo01.Materia;
 
 /**
  *
@@ -14,11 +15,28 @@ import javax.swing.ComboBoxModel;
  */
 public class ViewFormInscripcion extends javax.swing.JInternalFrame {
 
+    private HashSet<Materia> mat;
+    private HashSet<Alumno> alum;
+
     /**
      * Creates new form ViewFormInscripcion
+     *
+     * @param mat
+     * @param alum
      */
-    public ViewFormInscripcion() {
+    public ViewFormInscripcion(HashSet<Materia> mat, HashSet<Alumno> alum) {
+
         initComponents();
+        this.mat = mat;
+        this.alum = alum;
+
+        for (Alumno alumno : alum) {
+            comBoxMAlumno.addItem(alumno);
+        }
+
+        for (Materia materia : mat) {
+            comBoxMateria.addItem(materia);
+        }
     }
 
     /**
@@ -38,20 +56,30 @@ public class ViewFormInscripcion extends javax.swing.JInternalFrame {
         comBoxMateria = new javax.swing.JComboBox<>();
         comBoxMAlumno = new javax.swing.JComboBox<>();
 
-        lblFormInscripcion.setFont(new java.awt.Font("Sitka Display", 1, 18)); // NOI18N
+        lblFormInscripcion.setFont(new java.awt.Font("Sitka Display", 1, 24)); // NOI18N
         lblFormInscripcion.setForeground(new java.awt.Color(0, 0, 255));
         lblFormInscripcion.setText("Formulario de Inscripción");
 
         btnSalir.setBackground(new java.awt.Color(250, 0, 0));
+        btnSalir.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnSalir.setText("Salir");
         btnSalir.setAutoscrolls(true);
+        btnSalir.setPreferredSize(new java.awt.Dimension(75, 35));
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
             }
         });
 
+        btnInscribir.setBackground(new java.awt.Color(0, 225, 0));
+        btnInscribir.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnInscribir.setText("Inscribir");
+        btnInscribir.setPreferredSize(new java.awt.Dimension(75, 35));
+        btnInscribir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInscribirActionPerformed(evt);
+            }
+        });
 
         lblElijMateria.setFont(new java.awt.Font("Sitka Display", 0, 14)); // NOI18N
         lblElijMateria.setForeground(new java.awt.Color(0, 0, 255));
@@ -61,14 +89,12 @@ public class ViewFormInscripcion extends javax.swing.JInternalFrame {
         lblElijAlumno.setForeground(new java.awt.Color(0, 0, 255));
         lblElijAlumno.setText("ELIJA UN ALUMNO:");
 
-        comBoxMateria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comBoxMateria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comBoxMateriaActionPerformed(evt);
             }
         });
 
-        comBoxMAlumno.setModel(comBoxMAlumno.getModel());
         comBoxMAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comBoxMAlumnoActionPerformed(evt);
@@ -82,26 +108,27 @@ public class ViewFormInscripcion extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblElijMateria)
+                    .addComponent(lblElijAlumno))
+                .addGap(42, 42, 42)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(comBoxMAlumno, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(58, 58, 58))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(comBoxMateria, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(158, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(248, 248, 248)
-                        .addComponent(btnInscribir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnSalir))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
+                        .addComponent(btnInscribir, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(58, 58, 58))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(lblFormInscripcion)
-                        .addGap(107, 107, 107))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblElijMateria)
-                            .addComponent(lblElijAlumno))
-                        .addGap(42, 42, 42)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(comBoxMAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(comBoxMateria, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(80, 80, 80)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(174, 174, 174))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -116,11 +143,11 @@ public class ViewFormInscripcion extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblElijAlumno)
                     .addComponent(comBoxMAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(97, 97, 97)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnInscribir)
-                    .addComponent(btnSalir))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnInscribir, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32))
         );
 
         pack();
@@ -128,10 +155,8 @@ public class ViewFormInscripcion extends javax.swing.JInternalFrame {
 
     private void comBoxMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comBoxMateriaActionPerformed
         // TODO add your handling code here:
-        
-        
-         
-         
+
+
     }//GEN-LAST:event_comBoxMateriaActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -141,22 +166,23 @@ public class ViewFormInscripcion extends javax.swing.JInternalFrame {
 
     private void comBoxMAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comBoxMAlumnoActionPerformed
         // TODO add your handling code here:
-        
-        comBoxMAlumno.addItem("eaa");
-      
-        ComboBoxModel<String> cbm = null;
-        cbm.setSelectedItem(ViewMenuPpal.alum);
-       
-        comBoxMAlumno.setModel(cbm);
-        
+
     }//GEN-LAST:event_comBoxMAlumnoActionPerformed
+
+    private void btnInscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInscribirActionPerformed
+        // TODO add your handling code here:
+        Materia materiaSelec = (Materia) comBoxMateria.getSelectedItem();
+        Alumno alumSelec = (Alumno) comBoxMAlumno.getSelectedItem();
+
+        alumSelec.agregarMateria(materiaSelec);
+    }//GEN-LAST:event_btnInscribirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnInscribir;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JComboBox<String> comBoxMAlumno;
-    private javax.swing.JComboBox<String> comBoxMateria;
+    private javax.swing.JComboBox<Alumno> comBoxMAlumno;
+    private javax.swing.JComboBox<Materia> comBoxMateria;
     private javax.swing.JLabel lblElijAlumno;
     private javax.swing.JLabel lblElijMateria;
     private javax.swing.JLabel lblFormInscripcion;

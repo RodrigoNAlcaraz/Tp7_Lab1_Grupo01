@@ -1,7 +1,7 @@
 package tp7_lab1_grupo01;
 
 import java.util.ArrayList;
-
+import javax.swing.JOptionPane;
 
 public class Alumno {
 
@@ -15,8 +15,8 @@ public class Alumno {
 
     public Alumno(int legajo, String apellido, String nombre) {
         this.legajo = legajo;
-        this.apellido = apellido;
-        this.nombre = nombre;
+        this.apellido = apellido.toUpperCase();
+        this.nombre = nombre.toUpperCase();
     }
 
     public int getLegajo() {
@@ -45,35 +45,37 @@ public class Alumno {
 
     public void agregarMateria(Materia m) {
         boolean band = false;
-        String resc=null;
+        String resc = null;
         if (mat.isEmpty()) {
             mat.add(m);
-            System.out.println("inscripto con exito!");
+            JOptionPane.showMessageDialog(null, "El alumno: " + apellido + ", se ha inscripto con exito en la materia: " + m.getNombre());
 
         } else {
 
             for (Materia materia : mat) {
 
-                if (materia.getNombre().equals(m.getNombre())) {
+                if (materia.getNombre().equals(m.getNombre()) && materia.getIdMateria() == m.getIdMateria() && materia.getAnio() == m.getAnio()) {
                     band = true;
-                    resc=m.getNombre();
+                    resc = m.getNombre();
                 }
             }
 
             if (band) {
-                System.out.println("lo siento, ya esta inscripto en la materia: "+resc);
+                JOptionPane.showMessageDialog(null, "lo siento, ya esta inscripto en la materia: " + resc);
             } else {
                 mat.add(m);
-                System.out.println("Inscripto con exito!");
+                JOptionPane.showMessageDialog(null, "El alumno: " + apellido + " " + nombre + ", se ha inscripto con exito en la materia: " + m.getNombre());
             }
         }
     }
 
     public int cantidadMaterias() {
-        
-        
-
         return mat.size();
+    }
+
+    @Override
+    public String toString() {
+        return "LP: " + legajo + ", apellido: " + apellido + ", nombre: " + nombre;
     }
 
 }

@@ -5,6 +5,7 @@
  */
 package vistas;
 
+import java.util.HashSet;
 import tp7_lab1_grupo01.Alumno;
 import tp7_lab1_grupo01.Materia;
 
@@ -13,10 +14,9 @@ import tp7_lab1_grupo01.Materia;
  * @author nico
  */
 public class ViewMenuPpal extends javax.swing.JFrame {
-    
-   public static Alumno alum = new Alumno();
-    public static Materia mat = new Materia();
-    
+
+    private HashSet<Alumno> alum = new HashSet();
+    private HashSet<Materia> mat = new HashSet();
 
     /**
      * Creates new form viewMenu
@@ -39,6 +39,7 @@ public class ViewMenuPpal extends javax.swing.JFrame {
         menuFormularios = new javax.swing.JMenu();
         menuForMateria = new javax.swing.JMenuItem();
         menuForAlumno = new javax.swing.JMenuItem();
+        menuInscripA_Materias = new javax.swing.JMenu();
         menuForInscripcion = new javax.swing.JMenuItem();
         menuSalir = new javax.swing.JMenu();
         menuCerrarPrograma = new javax.swing.JMenuItem();
@@ -49,11 +50,11 @@ public class ViewMenuPpal extends javax.swing.JFrame {
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 504, Short.MAX_VALUE)
+            .addGap(0, 870, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 358, Short.MAX_VALUE)
+            .addGap(0, 500, Short.MAX_VALUE)
         );
 
         menuFormularios.setText("Formularios");
@@ -74,15 +75,19 @@ public class ViewMenuPpal extends javax.swing.JFrame {
         });
         menuFormularios.add(menuForAlumno);
 
+        jMenuBar1.add(menuFormularios);
+
+        menuInscripA_Materias.setText("Inscripcion a materias");
+
         menuForInscripcion.setText("Formulario de Inscripcion");
         menuForInscripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuForInscripcionActionPerformed(evt);
             }
         });
-        menuFormularios.add(menuForInscripcion);
+        menuInscripA_Materias.add(menuForInscripcion);
 
-        jMenuBar1.add(menuFormularios);
+        jMenuBar1.add(menuInscripA_Materias);
 
         menuSalir.setText("Salir");
 
@@ -102,11 +107,15 @@ public class ViewMenuPpal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -114,10 +123,9 @@ public class ViewMenuPpal extends javax.swing.JFrame {
 
     private void menuForMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuForMateriaActionPerformed
         // TODO add your handling code here:
-        
         escritorio.removeAll();
         escritorio.repaint();
-        ViewFormMaterias forMat = new ViewFormMaterias();
+        ViewFormMaterias forMat = new ViewFormMaterias(mat);
         forMat.setVisible(true);
         escritorio.add(forMat);
         escritorio.moveToFront(forMat);
@@ -125,10 +133,10 @@ public class ViewMenuPpal extends javax.swing.JFrame {
 
     private void menuForAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuForAlumnoActionPerformed
         // TODO add your handling code here:
-        
-         escritorio.removeAll();
+
+        escritorio.removeAll();
         escritorio.repaint();
-        ViewFormAlumno forAlum = new ViewFormAlumno();
+        ViewFormAlumno forAlum = new ViewFormAlumno(alum);
         forAlum.setVisible(true);
         escritorio.add(forAlum);
         escritorio.moveToFront(forAlum);
@@ -136,10 +144,9 @@ public class ViewMenuPpal extends javax.swing.JFrame {
 
     private void menuForInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuForInscripcionActionPerformed
         // TODO add your handling code here:
-        
-          escritorio.removeAll();
+        escritorio.removeAll();
         escritorio.repaint();
-        ViewFormInscripcion forInsc = new ViewFormInscripcion();
+        ViewFormInscripcion forInsc = new ViewFormInscripcion(mat, alum);
         forInsc.setVisible(true);
         escritorio.add(forInsc);
         escritorio.moveToFront(forInsc);
@@ -147,8 +154,8 @@ public class ViewMenuPpal extends javax.swing.JFrame {
 
     private void menuCerrarProgramaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCerrarProgramaActionPerformed
         // TODO add your handling code here:
-        
-     System.exit(0);
+
+        System.exit(0);
     }//GEN-LAST:event_menuCerrarProgramaActionPerformed
 
     /**
@@ -195,6 +202,7 @@ public class ViewMenuPpal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuForInscripcion;
     private javax.swing.JMenuItem menuForMateria;
     private javax.swing.JMenu menuFormularios;
+    private javax.swing.JMenu menuInscripA_Materias;
     private javax.swing.JMenu menuSalir;
     // End of variables declaration//GEN-END:variables
 }
